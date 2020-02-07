@@ -1,5 +1,12 @@
 import React from 'react'
+import Auth from "./auth/auth"
+import Recipes from "./recipe/recipes"
+import Shopping from "./shop/shopping"
 import './header.css'
+import { Switch, Route } from "react-router-dom";
+import {createBrowserHistory} from 'history'
+
+const history = createBrowserHistory();
 
 
 class Header extends React.Component{
@@ -10,34 +17,36 @@ class Header extends React.Component{
         this.onShopClick = this.onShopClick.bind(this);
         this.onLogoutClick = this.onLogoutClick.bind(this);
         this.state = {
-            authBgColor : "none",
-            recpBgColor : "none",
-            shopBgColor : "none"
+            authBgColor : "rgb(240, 245, 244)",
+            recpBgColor : "rgb(240, 245, 244)",
+            shopBgColor : "rgb(240, 245, 244)"
 
         }
     }
     onAuthClick(event){
-        
-        this.setState({ authBgColor: "rgb(212, 217, 213)",
-                        shopBgColor: "none",
-                        recpBgColor: "none"
+        history.push("/auth")
+        this.setState({ 
+        authBgColor : "rgb(212, 217, 213)",
+        recpBgColor : "rgb(240, 245, 244)",
+        shopBgColor : "rgb(240, 245, 244)"
                     })
         console.log(event);
     }
     onRecpClick(event){
-
+        history.push("/recipes")
         this.setState({
-            recpBgColor: "rgb(212, 217, 213)",
-            shopBgColor: "none",
-            authBgColor: "none"})
+            authBgColor : "rgb(240, 245, 244)",
+            recpBgColor : "rgb(212, 217, 213)",
+            shopBgColor : "rgb(240, 245, 244)"})
         console.log(event);
         
     }
     onShopClick(event){
+        history.push("/shopping-list")
         this.setState({
-            shopBgColor: "rgb(212, 217, 213)",
-            recpBgColor: "none",
-            authBgColor: "none"})
+            authBgColor : "rgb(240, 245, 244)",
+            recpBgColor : "rgb(240, 245, 244)",
+            shopBgColor : "rgb(212, 217, 213)"})
         console.log(event);
     }
     onLogoutClick(event){
@@ -88,6 +97,18 @@ class Header extends React.Component{
                     <option value="Save Data">Save Data</option>
                     <option value="Fetch Data">Fetch Data</option>
                 </select>
+            </div>
+            
+
+            <div className="routing-info">
+            <Switch>
+                {/* <Route exact path="/" render = {() =>{ 
+                history.push("/auth");
+                return <Auth/>} }/> */}
+                <Route exact path="/auth" render = {() => <Auth/> }/>
+                <Route exact path="/recipes" render = {() => <Recipes/> }/>
+                <Route exact path="/shopping" render = {() => <Shopping/> }/>
+            </Switch>
             </div>
 
             </div>

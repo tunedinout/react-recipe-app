@@ -30,14 +30,12 @@
     display: inline-block;
     font-size: 14px;
     color : rgb(95, 93, 93);
-    color : rgb(99, 93, 93);
 
     margin-right: 10px;   
 }
 
 .auth-txt{
     margin-top: 10px;
-    background: none;
     border: none;
     
 }
@@ -54,7 +52,7 @@
 
 .recipes-txt{
     margin-top: 10px;
-    background: none;
+    /* background: none; */
     border: none;
 }
 .shopping-list{
@@ -69,7 +67,7 @@
 
 .shopping-list-txt{
     margin-top: 10px;
-    background: none;
+    /* background: none; */
     border: none;
 }
 
@@ -85,7 +83,7 @@
 
 .logout-txt{
     margin-top: 10px;
-    background: none;
+    /* background: none; */
     border: none; 
 }
 
@@ -100,6 +98,6 @@
 
 .manage-txt{
     margin-top: 10px;
-    background: none;
+    /* background: none; */
     border: none; 
 }
