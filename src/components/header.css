@@ -1,0 +1,86 @@
+
+.header-container{
+    background-color: rgb(240, 245, 244);
+    height: 50px;
+   border-bottom : 1px solid rgb(236, 236, 236);
+    
+  
+}
+
+.header-title{
+    width: 150px;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    display: inline-block;
+    font-size: 18px;
+    color : rgb(95, 93, 93);
+    margin-right: 10px;
+}
+.header-title-txt{
+    margin-top: 10px;
+    background: none;
+    border: none;
+}
+.recipes{
+    width: 70px;
+    height: 100%;
+    
+    /* transform: translateY(-12px); */
+    display: inline-block;
+    font-size: 14px;
+    color : rgb(95, 93, 93);
+    margin-right: 10px;   
+}
+
+.recipes-txt{
+    margin-top: 10px;
+    background: none;
+    border: none;
+}
+.shopping-list{
+    width: 90px;
+    height: 100%;
+   
+    /* transform: translateY(-12px); */
+    display: inline-block;
+    font-size: 14px;
+    color : rgb(95, 93, 93);
+}
+
+.shopping-list-txt{
+    margin-top: 10px;
+    background: none;
+    border: none;
+}
+
+.logout{
+    width: 70px;
+    height: 100%;
+    display: inline-block;
+    margin-left: 60%;
+    font-size: 14px;
+    color : rgb(95, 93, 93);
+    margin-right: 10px;  
+}
+
+.logout-txt{
+    margin-top: 10px;
+    background: none;
+    border: none; 
+}
+
+.manage{
+    width: 70px;
+    height: 100%;
+    display: inline-block;
+    font-size: 14px;
+    color : rgb(95, 93, 93);
+    margin-right: 10px;  
+}
+
+.manage-txt{
+    margin-top: 10px;
+    background: none;
+    border: none; 
+}
