@@ -82,7 +82,7 @@ class Header extends React.Component {
             style={{ backgroundColor: recpBgColor }}
           >
             <div className="recipes-txt">
-              <Link className="recipes-link" to="/recipes"> Recipes</Link> 
+              <Link className="recipes-link" to="/recipes"> Recipes</Link>
             </div>
           </div>
         ) : ''

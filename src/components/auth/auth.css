@@ -1,0 +1,35 @@
+.auth-container{
+    width: 600px;
+    height: 500px;
+}
+
+.form-container{
+   width: 600px;
+   height: 700px;
+   text-align: left;
+}
+.form-email-text{
+    height: 40px;
+    display: block;
+    
+   
+}
+
+.form-email-input{
+    margin-top:10px;
+    display: block;
+    width: 800px;
+    margin-bottom: 10px;
+}
+
+.form-paswd-text{
+    height: 40px;
+    display: block;
+   
+}
+
+.form-paswd-input{
+    margin-top:10px;
+    display: block;
+    width: 800px;
+}
