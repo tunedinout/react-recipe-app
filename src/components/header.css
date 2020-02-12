@@ -1,9 +1,10 @@
 
 .header-container{
     background-color: rgb(240, 245, 244);
-    height: 50px;
-   border-bottom : 1px solid rgb(236, 236, 236);
+    height: 38px;
+   border-bottom : 1px solid rgb(192, 184, 184);
     cursor: pointer;
+    overflow: hidden;
   
 }
 
@@ -23,21 +24,25 @@
     border: none;
 }
 .auth{
-    width: 100px;
+    width: 105px;
     height: 100%;
-    
+    padding: 5px;
     /* transform: translateY(-12px); */
     display: inline-block;
     font-size: 14px;
     color : rgb(95, 93, 93);
-
-    margin-right: 10px;   
 }
 
 .auth-txt{
     margin-top: 10px;
     border: none;
     
+}
+.auth-link{
+    height: 100%;
+    text-decoration: none;
+    color: rgb(70, 65, 65);
+    letter-spacing: 1.2px;
 }
 .recipes{
     width: 70px;
@@ -55,10 +60,15 @@
     /* background: none; */
     border: none;
 }
+.recipes-link{
+    text-decoration: none;
+    color: rgb(70, 65, 65);
+    letter-spacing: 1.2px;
+}
 .shopping-list{
-    width: 90px;
+    width: 105px;
     height: 100%;
-   
+    padding: 5px;
     /* transform: translateY(-12px); */
     display: inline-block;
     font-size: 14px;
@@ -70,7 +80,11 @@
     /* background: none; */
     border: none;
 }
-
+.shopping-list-link{
+    text-decoration: none;
+    color: rgb(70, 65, 65);
+    letter-spacing: 1.2px;
+}
 .logout{
     width: 70px;
     height: 100%;

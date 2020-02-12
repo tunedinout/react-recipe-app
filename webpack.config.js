@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
+    publicPath: '/',
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
@@ -17,6 +18,7 @@ module.exports = {
     hot: true,
     inline: true,
     port: 3000,
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

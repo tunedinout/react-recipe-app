@@ -1,13 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import Auth from './auth/auth';
-import Recipes from './recipe/recipes';
-import Shopping from './shop/shopping';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './header.css';
-
-const history = createBrowserHistory();
-
 
 class Header extends React.Component {
   constructor() {
@@ -24,7 +18,6 @@ class Header extends React.Component {
   }
 
   onAuthClick() {
-    history.push('/auth');
     this.setState({
       authBgColor: 'rgb(212, 217, 213)',
       recpBgColor: 'rgb(240, 245, 244)',
@@ -33,7 +26,6 @@ class Header extends React.Component {
   }
 
   onRecpClick() {
-    history.push('/recipes');
     this.setState({
       authBgColor: 'rgb(240, 245, 244)',
       recpBgColor: 'rgb(212, 217, 213)',
@@ -42,7 +34,6 @@ class Header extends React.Component {
   }
 
   onShopClick() {
-    history.push('/shopping-list');
     this.setState({
       authBgColor: 'rgb(240, 245, 244)',
       recpBgColor: 'rgb(240, 245, 244)',
@@ -53,6 +44,7 @@ class Header extends React.Component {
 
   render() {
     const { authBgColor, recpBgColor, shopBgColor } = this.state;
+    const { isAuthenticated } = this.props;
     return (
 
       <div className="header-container">
@@ -73,24 +65,28 @@ class Header extends React.Component {
           style={{ backgroundColor: authBgColor }}
         >
           <div className="auth-txt">
-            Authentication
+            <Link className="auth-link" to="/auth"> Authentication</Link>
           </div>
 
         </div>
 
         {/* hide if not authenticated */}
-        <div
-          role="button"
-          className="recipes"
-          onClick={this.onRecpClick}
-          onKeyDown={this.onRecpClick}
-          tabIndex={0}
-          style={{ backgroundColor: recpBgColor }}
-        >
-          <div className="recipes-txt">
-            Recipes
+        {
+        isAuthenticated ? (
+          <div
+            role="button"
+            className="recipes"
+            onClick={this.onRecpClick}
+            onKeyDown={this.onRecpClick}
+            tabIndex={0}
+            style={{ backgroundColor: recpBgColor }}
+          >
+            <div className="recipes-txt">
+              <Link className="recipes-link" to="/recipes"> Recipes</Link> 
+            </div>
           </div>
-        </div>
+        ) : ''
+        }
         <div
           role="button"
           className="shopping-list"
@@ -100,7 +96,7 @@ class Header extends React.Component {
           style={{ backgroundColor: shopBgColor }}
         >
           <div className="shopping-list-txt">
-            Shopping List
+            <Link className="shopping-list-link" to="/shopping-list"> Shopping List</Link>
           </div>
 
 
@@ -123,17 +119,16 @@ class Header extends React.Component {
             <option value="Fetch Data">Fetch Data</option>
           </select>
         </div>
-
-        <div className="routing-info">
-          <BrowserRouter>
-            <Route path="/auth" render={() => <Auth />} />
-            <Route path="/recipes" render={() => <Recipes />} />
-            <Route path="/shopping" render={() => <Shopping />} />
-          </BrowserRouter>
-        </div>
-
       </div>
     );
   }
 }
+Header.defaultProps = {
+  isAuthenticated: false,
+};
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};
+
 export default Header;
