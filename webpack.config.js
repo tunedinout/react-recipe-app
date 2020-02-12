@@ -8,12 +8,15 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
   },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
   devServer: {
     publicPath: '/',
     contentBase: './src',
     hot: true,
     inline: true,
-    port: 8080,
+    port: 3000,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -32,7 +35,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -42,7 +45,7 @@ module.exports = {
                 '@babel/preset-env',
                 {
                   targets: {
-                    node: '10',
+                    node: '12',
                   },
                 },
               ],

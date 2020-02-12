@@ -15,7 +15,6 @@ class Header extends React.Component {
     this.onAuthClick = this.onAuthClick.bind(this);
     this.onRecpClick = this.onRecpClick.bind(this);
     this.onShopClick = this.onShopClick.bind(this);
-    this.onLogoutClick = this.onLogoutClick.bind(this);
     this.state = {
       authBgColor: 'rgb(240, 245, 244)',
       recpBgColor: 'rgb(240, 245, 244)',
