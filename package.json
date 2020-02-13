@@ -43,7 +43,8 @@
     "webpack-dev-server": "^3.8.2"
   },
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start" : "node server.js",
+    "start-dev": "webpack-dev-server --mode development",
     "build": "webpack -p",
     "eslint": "eslint src --ext .jsx,.js",
     "stylelint": "stylelint --aei .css,.scss",
