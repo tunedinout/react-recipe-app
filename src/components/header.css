@@ -1,10 +1,11 @@
 
 .header-container{
     background-color: rgb(240, 245, 244);
-    height: 38px;
-   border-bottom : 1px solid rgb(192, 184, 184);
+    height: 48px;
+   /* border-bottom : 1px solid rgb(192, 184, 184); */
     cursor: pointer;
-    overflow: hidden;
+    overflow: visible;
+    
   
 }
 
@@ -23,14 +24,22 @@
     background: none;
     border: none;
 }
-.auth{
-    width: 105px;
-    height: 100%;
-    padding: 5px;
-    /* transform: translateY(-12px); */
+.auth-btn{
+   
+    border: none;
+    color: white;
+    height: 50px;
+    transform: translateY(-11%);
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    color : rgb(95, 93, 93);
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.auth-btn:focus{
+    outline: 0;
 }
 
 .auth-txt{
@@ -66,13 +75,20 @@
     letter-spacing: 1.2px;
 }
 .shopping-list{
-    width: 105px;
-    height: 100%;
-    padding: 5px;
-    /* transform: translateY(-12px); */
+
+    border: none;
+    color: white;
+    height: 50px;
+    transform: translateY(-11%);
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    color : rgb(95, 93, 93);
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.shopping-list:focus{
+    outline: 0;
 }
 
 .shopping-list-txt{
@@ -85,16 +101,29 @@
     color: rgb(70, 65, 65);
     letter-spacing: 1.2px;
 }
-.logout{
-    width: 70px;
+.logout-btn{
+    width: 80px;
     height: 100%;
     display: inline-block;
-    margin-left: 45%;
+    margin-left: 42%;
     font-size: 14px;
     color : rgb(95, 93, 93);
     margin-right: 10px;  
-}
+    border : none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
 
+    
+}
+.logout-btn:focus{
+    outline: 0;
+}
+.logout-link{
+    text-decoration: none;
+    color: rgb(90, 86, 86);
+}
 .logout-txt{
     margin-top: 10px;
     /* background: none; */
@@ -102,16 +131,42 @@
 }
 
 .manage{
-    width: 70px;
+    width: 80px;;
     height: 100%;
     display: inline-block;
+    transform: translateY(-7px);
+}
+.manage-content{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  color: black;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 6px 8px;
+  z-index: 100;
+}
+.manage:hover .manage-content {
+    display: block;
+  }
+.manage-txt{
+    width: 80px;
+    height: 100%;
+    display: inline-block;
+    margin-left: 5px;
     font-size: 14px;
     color : rgb(95, 93, 93);
     margin-right: 10px;  
+    border : none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    
 }
 
-.manage-txt{
-    margin-top: 10px;
-    /* background: none; */
-    border: none; 
+.manage-link{
+    text-decoration: none;
+    color: rgb(70, 65, 65);
+    letter-spacing: 1.2px;
 }

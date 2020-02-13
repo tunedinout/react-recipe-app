@@ -3,47 +3,68 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './header.css';
 
+const lightBtnBg = 'rgb(240, 245, 244)';
+const darkBtnBg = 'rgb(212, 217, 213)';
+const defaultBgColors = {
+  authBgColor: lightBtnBg,
+  recpBgColor: lightBtnBg,
+  shopBgColor: lightBtnBg,
+  logoutBgColor: lightBtnBg,
+  manageBgColor: lightBtnBg,
+};
 class Header extends React.Component {
   constructor() {
     super();
     this.onAuthClick = this.onAuthClick.bind(this);
     this.onRecpClick = this.onRecpClick.bind(this);
     this.onShopClick = this.onShopClick.bind(this);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.onManageClick = this.onManageClick.bind(this);
     this.state = {
-      authBgColor: 'rgb(240, 245, 244)',
-      recpBgColor: 'rgb(240, 245, 244)',
-      shopBgColor: 'rgb(240, 245, 244)',
-
+      ...defaultBgColors,
     };
   }
 
   onAuthClick() {
     this.setState({
-      authBgColor: 'rgb(212, 217, 213)',
-      recpBgColor: 'rgb(240, 245, 244)',
-      shopBgColor: 'rgb(240, 245, 244)',
+      ...defaultBgColors,
+      authBgColor: darkBtnBg,
     });
   }
 
   onRecpClick() {
     this.setState({
-      authBgColor: 'rgb(240, 245, 244)',
-      recpBgColor: 'rgb(212, 217, 213)',
-      shopBgColor: 'rgb(240, 245, 244)',
+      ...defaultBgColors,
+      recpBgColor: darkBtnBg,
     });
   }
 
   onShopClick() {
     this.setState({
-      authBgColor: 'rgb(240, 245, 244)',
-      recpBgColor: 'rgb(240, 245, 244)',
-      shopBgColor: 'rgb(212, 217, 213)',
+      ...defaultBgColors,
+      shopBgColor: darkBtnBg,
+    });
+  }
+
+  onLogoutClick() {
+    this.setState({
+      ...defaultBgColors,
+      logoutBgColor: darkBtnBg,
+    });
+  }
+
+  onManageClick() {
+    this.setState({
+      ...defaultBgColors,
+      manageBgColor: darkBtnBg,
     });
   }
 
 
   render() {
-    const { authBgColor, recpBgColor, shopBgColor } = this.state;
+    const {
+      authBgColor, recpBgColor, shopBgColor, logoutBgColor, manageBgColor,
+    } = this.state;
     const { isAuthenticated } = this.props;
     return (
 
@@ -56,19 +77,17 @@ class Header extends React.Component {
 
         </div>
 
-        <div
-          role="button"
-          className="auth"
+        <button
+          type="button"
+          className="auth-btn"
           onClick={this.onAuthClick}
-          onKeyDown={this.onAuthClick}
-          tabIndex={0}
           style={{ backgroundColor: authBgColor }}
         >
           <div className="auth-txt">
             <Link className="auth-link" to="/auth"> Authentication</Link>
           </div>
 
-        </div>
+        </button>
 
         {/* hide if not authenticated */}
         {
@@ -87,12 +106,11 @@ class Header extends React.Component {
           </div>
         ) : ''
         }
-        <div
-          role="button"
+        <button
+          type="button"
           className="shopping-list"
           onClick={this.onShopClick}
           onKeyDown={this.onShopClick}
-          tabIndex={0}
           style={{ backgroundColor: shopBgColor }}
         >
           <div className="shopping-list-txt">
@@ -100,24 +118,34 @@ class Header extends React.Component {
           </div>
 
 
-        </div>
-        <div
-          role="button"
-          className="logout"
+        </button>
+        <button
+          type="button"
+          className="logout-btn"
           onClick={this.onLogoutClick}
           onKeyDown={this.onLogoutClick}
-          tabIndex={0}
+          style={{ backgroundColor: logoutBgColor }}
         >
           <div className="logout-txt">
-            Logout
+            <Link className="logout-link" to="/logout"> Logout</Link>
           </div>
-        </div>
+
+
+        </button>
         <div className="manage">
-          <select>
-            <option value="none" selected disabled hidden>Manage</option>
-            <option value="Save Data">Save Data</option>
-            <option value="Fetch Data">Fetch Data</option>
-          </select>
+          <button
+            type="button"
+            className="manage-txt"
+            onClick={this.onManageClick}
+            onKeyDown={this.onManageClick}
+            style={{ backgroundColor: manageBgColor }}
+          >
+            <Link className="manage-link">Manage</Link>
+          </button>
+          <div className="manage-content">
+            <p>Save Data</p>
+            <p>Fetch Data</p>
+          </div>
         </div>
       </div>
     );
