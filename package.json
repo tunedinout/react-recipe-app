@@ -45,7 +45,8 @@
     "start": "webpack-dev-server --mode development",
     "build": "webpack -p",
     "eslint": "eslint src --ext .jsx,.js",
-    "stylelint": "stylelint --aei .css,.scss"
+    "stylelint": "stylelint --aei .css,.scss",
+    "heroku-prebuild": "npm install --dev"
   },
   "pre-commit": [
     "eslint",
