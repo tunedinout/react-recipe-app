@@ -12,6 +12,13 @@ module.exports = {
   resolve: {
     extensions: ['*', '.js', '.jsx'],
   },
+  devServer: {
+    publicPath: '/',
+    contentBase: './src',
+    hot: true,
+    inline: true,
+    historyApiFallback: true,
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
