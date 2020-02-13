@@ -29,7 +29,6 @@ function Auth() {
         <button type="button" className="form-btn-switch">
           Switch to signup
         </button>
-        
       </div>
     </div>
   );

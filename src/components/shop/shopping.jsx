@@ -4,13 +4,11 @@ import './shopping.css';
 function Shopping() {
   return (
     <div className="shop-container">
-   
-
       <div className="form-name-container">
         <div className="form-name">
           <span>Name</span>
         </div>
-        <div className="form-name-input" >
+        <div className="form-name-input">
           <input type="text" />
         </div>
       </div>

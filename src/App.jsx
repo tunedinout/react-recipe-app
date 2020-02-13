@@ -29,7 +29,6 @@ class App extends React.Component {
             <Switch>
               <Route path="/auth" render={() => <Auth />} />
               <Route path="/recipes" render={() => <Recipes />} />
-             
               <Route path="/shopping-list" render={() => <Shopping />} />
               <Route path="/logout" render={() => <Logout />} />
               <Route path="/">

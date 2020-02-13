@@ -140,7 +140,7 @@ class Header extends React.Component {
             onKeyDown={this.onManageClick}
             style={{ backgroundColor: manageBgColor }}
           >
-            <Link className="manage-link">Manage</Link>
+            <Link href="/manage/" className="manage-link">Manage</Link>
           </button>
           <div className="manage-content">
             <p>Save Data</p>
