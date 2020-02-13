@@ -17,6 +17,7 @@ module.exports = {
     contentBase: './src',
     hot: true,
     inline: true,
+    port: process.env.PORT || 3000,
     historyApiFallback: true,
   },
   plugins: [
