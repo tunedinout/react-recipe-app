@@ -27,7 +27,7 @@
 .auth-btn{
    
     border: none;
-    color: white;
+    color: black;
     height: 50px;
     transform: translateY(-11%);
     text-align: center;
@@ -53,23 +53,32 @@
     color: rgb(70, 65, 65);
     letter-spacing: 1.2px;
 }
-.recipes{
-    width: 70px;
-    height: 100%;
-    
-    /* transform: translateY(-12px); */
+
+.recipes-btn{
+   
+    border: none;
+    color: black;
+    height: 50px;
+    transform: translateY(-11%);
+    text-align: center;
+    text-decoration: none;
     display: inline-block;
-    font-size: 14px;
-    color : rgb(95, 93, 93);
-    margin-right: 10px;   
+    font-size: 13px;
+    cursor: pointer;
+    border-radius: 10px;
+    
+}
+.recipes-btn:focus{
+    outline: 0;
 }
 
 .recipes-txt{
     margin-top: 10px;
-    /* background: none; */
     border: none;
+    
 }
 .recipes-link{
+    height: 100%;
     text-decoration: none;
     color: rgb(70, 65, 65);
     letter-spacing: 1.2px;

@@ -1,47 +1,101 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import { setIsAuthenticated as setAuth } from './actions/actions';
 import Header from './components/Header';
 import './App.css';
 import Auth from './components/auth/auth';
 import Recipes from './components/recipe/recipes';
 import Shopping from './components/shop/shopping';
-import Logout from './components/logout/logout';
+import history from './history';
 
-const history = createBrowserHistory();
 class App extends React.Component {
   constructor() {
     super();
-    this.state = {
-      isAuthenticated: false,
-    };
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogin() {
+    // https://node-mongo-auth.herokuapp.com/users/authenticate
+    // let data = Axios.get('https://node-mongo-auth.herokuapp.com/users/authenticate');
+    // console.log(data);
+    const { isAuthenticated, setIsAuthenticated } = this.props;
+    setIsAuthenticated(!isAuthenticated);
+    history.replace('/');
+    history.push('/shopping-list');
+  }
+
+  handleLogout() {
+    const { isAuthenticated, setIsAuthenticated } = this.props;
+    setIsAuthenticated(!isAuthenticated);
+    history.push('/auth');
   }
 
   render() {
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated } = this.props;
     return (
-      <Router>
-        <div className="app-container">
-          <div>
-            <Header isAuthenticated={isAuthenticated} history={history} />
-          </div>
-          <div className="app-view">
-            <Switch>
-              <Route path="/auth" render={() => <Auth />} />
-              <Route path="/recipes" render={() => <Recipes />} />
-              <Route path="/shopping-list" render={() => <Shopping />} />
-              <Route path="/logout" render={() => <Logout />} />
-              <Route path="/">
-                <Auth />
-              </Route>
-            </Switch>
-          </div>
 
+      <div className="app-container">
+        <div>
+          <Header logout={this.handleLogout} />
         </div>
-      </Router>
+        <div className="app-view">
+          <Switch>
+            <Route path="/auth" render={() => <Auth handleLogin={this.handleLogin} />} />
+            <Route
+              path="/recipes"
+              render={(props) => {
+                if (!isAuthenticated) {
+                  props.history.push('/auth');
+                  return <Auth handleLogin={this.handleLogin} />;
+                }
+                return <Recipes />;
+              }}
+            />
+            <Route path="/shopping-list" render={() => <Shopping />} />
+            <Route
+              path="/"
+              render={(props) => {
+                if (!isAuthenticated) {
+                  props.history.push('/auth');
+                  return <Auth handleLogin={this.handleLogin} />;
+                }
+                return <Shopping />;
+              }}
+            />
+          </Switch>
+        </div>
 
+      </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.isAuthenticated,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setIsAuthenticated: (isAuthenticated) => dispatch(setAuth(isAuthenticated)),
+});
+
+App.defaultProps = {
+  isAuthenticated: false,
+  setIsAuthenticated() {
+  },
+};
+App.propTypes = {
+  isAuthenticated: {
+    type: propTypes.bool,
+    required: true,
+  },
+
+  setIsAuthenticated: {
+    type: propTypes.func,
+    required: true,
+  },
+
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

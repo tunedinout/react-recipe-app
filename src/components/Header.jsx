@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import propTypes from 'prop-types';
+import history from '../history';
 import './header.css';
 
 const lightBtnBg = 'rgb(240, 245, 244)';
@@ -25,7 +27,31 @@ class Header extends React.Component {
     };
   }
 
+  componentDidMount() {
+    let currentURL = `${window.location}`;
+    currentURL = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+    if (currentURL === 'shopping-list') this.onShopClick();
+    else if (currentURL === 'recipes') this.onRecpClick();
+    else if (currentURL === 'auth') this.onAuthClick();
+  }
+
+  // componentDidUpdate() {
+  //   let currentURL = `${window.location}`;
+  //   currentURL = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+  //   console.log(currentURL);
+
+  //   if (currentURL === 'shopping-list') {
+  //     this.setState({
+  //       ...defaultBgColors,
+  //       shopBgColor: darkBtnBg,
+  //     });
+  //   }
+  //   else if (currentURL === 'recipes') this.onRecpClick();
+  //   else if (currentURL === 'auth') this.onAuthClick();
+  // }
+
   onAuthClick() {
+    history.push('/auth');
     this.setState({
       ...defaultBgColors,
       authBgColor: darkBtnBg,
@@ -33,6 +59,7 @@ class Header extends React.Component {
   }
 
   onRecpClick() {
+    history.push('/recipes');
     this.setState({
       ...defaultBgColors,
       recpBgColor: darkBtnBg,
@@ -40,6 +67,7 @@ class Header extends React.Component {
   }
 
   onShopClick() {
+    history.push('/shopping-list');
     this.setState({
       ...defaultBgColors,
       shopBgColor: darkBtnBg,
@@ -62,10 +90,17 @@ class Header extends React.Component {
 
 
   render() {
-    const {
-      authBgColor, recpBgColor, shopBgColor, logoutBgColor, manageBgColor,
-    } = this.state;
-    const { isAuthenticated } = this.props;
+    let { authBgColor, recpBgColor, shopBgColor } = this.state;
+    const { logoutBgColor, manageBgColor } = this.state;
+    const { logout, isAuthenticated } = this.props;
+    let currentURL = `${window.location}`;
+    currentURL = currentURL.substring(currentURL.lastIndexOf('/') + 1);
+
+
+    if (currentURL === 'shopping-list') shopBgColor = darkBtnBg;
+    if (currentURL === 'reicpes') recpBgColor = darkBtnBg;
+    if (currentURL === 'auth') authBgColor = darkBtnBg;
+
     return (
 
       <div className="header-container">
@@ -77,33 +112,37 @@ class Header extends React.Component {
 
         </div>
 
-        <button
-          type="button"
-          className="auth-btn"
-          onClick={this.onAuthClick}
-          style={{ backgroundColor: authBgColor }}
-        >
-          <div className="auth-txt">
-            <Link className="auth-link" to="/auth"> Authentication</Link>
-          </div>
+        {
+          !isAuthenticated ? (
+            <button
+              type="button"
+              className="auth-btn"
+              onClick={this.onAuthClick}
+              style={{ backgroundColor: authBgColor }}
+            >
 
-        </button>
+              <div className="auth-txt">
+                <div className="auth-link" to="/auth"> Authentication </div>
+              </div>
+
+            </button>
+          ) : ''
+        }
 
         {/* hide if not authenticated */}
         {
         isAuthenticated ? (
-          <div
-            role="button"
-            className="recipes"
+          <button
+            type="button"
+            className="recipes-btn"
             onClick={this.onRecpClick}
             onKeyDown={this.onRecpClick}
-            tabIndex={0}
             style={{ backgroundColor: recpBgColor }}
           >
             <div className="recipes-txt">
-              <Link className="recipes-link" to="/recipes"> Recipes</Link>
+              <div className="recipes-link"> Recipes</div>
             </div>
-          </div>
+          </button>
         ) : ''
         }
         <button
@@ -114,7 +153,7 @@ class Header extends React.Component {
           style={{ backgroundColor: shopBgColor }}
         >
           <div className="shopping-list-txt">
-            <Link className="shopping-list-link" to="/shopping-list"> Shopping List</Link>
+            <div className="shopping-list-link"> Shopping List</div>
           </div>
 
 
@@ -122,8 +161,8 @@ class Header extends React.Component {
         <button
           type="button"
           className="logout-btn"
-          onClick={this.onLogoutClick}
-          onKeyDown={this.onLogoutClick}
+          onClick={logout}
+          onKeyDown={logout}
           style={{ backgroundColor: logoutBgColor }}
         >
           <div className="logout-txt">
@@ -151,12 +190,27 @@ class Header extends React.Component {
     );
   }
 }
+
 Header.defaultProps = {
   isAuthenticated: false,
+  logout() {
+  },
 };
-
 Header.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  isAuthenticated: {
+    type: propTypes.bool,
+    required: true,
+  },
+
+  logout: {
+    type: propTypes.func,
+    required: true,
+  },
+
 };
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Header);
