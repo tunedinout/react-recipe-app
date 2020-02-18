@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import './auth.css';
 
 class Auth extends React.Component {
@@ -16,7 +17,7 @@ class Auth extends React.Component {
 
   render() {
     const { loginActive } = this.state;
-
+    const { handleLogin } = this.props;
 
     return (
       <div className="auth-container">
@@ -38,7 +39,7 @@ class Auth extends React.Component {
         </div>
 
         <div className="form-btn-container">
-          <button type="submit" className="form-btn-login" onClick={this.props.handleLogin}>
+          <button type="submit" className="form-btn-login" onClick={handleLogin}>
             { loginActive ? 'Login' : 'Signup' }
           </button>
           |
@@ -52,5 +53,15 @@ class Auth extends React.Component {
     );
   }
 }
+Auth.defaultProps = {
+  handleLogin() {
+  },
+};
+Auth.propTypes = {
+  handleLogin: {
+    type: propTypes.func,
+    required: true,
+  },
+};
 
 export default Auth;

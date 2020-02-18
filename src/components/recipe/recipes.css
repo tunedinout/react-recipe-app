@@ -1,0 +1,116 @@
+
+.recipe-container{
+    /* text-align: left; */
+    width: 100%;
+    position: relative;
+}
+
+.btn-container{
+     border-bottom: 1px solid grey ;
+     text-align: left;
+     width: 300px;
+     float: left;
+   
+    
+     
+ }
+ 
+ .btn-new{
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+ }
+
+ .recipe-create-view {
+    width: 60%;
+    height: 600px;
+    /* background-color: green;; */
+    float: right;
+    font-size: 20px;
+    margin: 10px;
+    margin-top: 70px;
+ }
+
+ .button-panel{
+     margin: 10px;
+     text-align: left;
+ }
+
+ .panel-btn-save{
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+ }
+
+.panel-btn-delete{
+    background-color: rgb(228, 54, 68); 
+    border: none;
+    color: white;
+    padding: 10px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.input-container{
+    margin : 10px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 800;
+}
+.input-container input{
+    width: 100%;
+    margin-top: 5px;
+    height: 35px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    word-spacing: normal;
+   
+   
+    
+}
+
+.desc-container{
+    margin : 10px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 800;
+}
+.desc-container input{
+    width: 100%;
+    margin-top: 5px;
+    height: 100px;
+    padding: 12px 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    word-spacing: normal;
+   
+   
+    
+}
