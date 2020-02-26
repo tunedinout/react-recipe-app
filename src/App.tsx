@@ -1,23 +1,27 @@
-import React from 'react';
+import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import propTypes from 'prop-types';
-import { setIsAuthenticated as setAuth } from './actions/actions';
+import { setIsAuthenticated as setAuth } from './actions/Actions';
 import Header from './components/Header';
 import './App.css';
-import Auth from './components/auth/auth';
-import Recipes from './components/recipe/recipes';
-import Shopping from './components/shop/shopping';
+import Auth from './components/auth/Auth';
+import Recipes from './components/recipe/Recipes';
+import Shopping from './components/shop/Shopping';
 import history from './history';
+import { RecipeBookState } from './types/types';
 
-class App extends React.Component {
-  constructor() {
-    super();
+interface Props{
+  isAuthenticated?: boolean;
+  setIsAuthenticated?: Function;
+}
+class App extends React.Component <Props> {
+  constructor(props: Props) {
+    super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
   }
 
-  handleLogin() {
+  handleLogin(): void {
     // https://node-mongo-auth.herokuapp.com/users/authenticate
     // let data = Axios.get('https://node-mongo-auth.herokuapp.com/users/authenticate');
     // console.log(data);
@@ -27,13 +31,13 @@ class App extends React.Component {
     history.push('/shopping-list');
   }
 
-  handleLogout() {
+  handleLogout(): void{
     const { isAuthenticated, setIsAuthenticated } = this.props;
     setIsAuthenticated(!isAuthenticated);
     history.push('/auth');
   }
 
-  render() {
+  render(): React.ReactFragment {
     const { isAuthenticated } = this.props;
     return (
 
@@ -43,10 +47,10 @@ class App extends React.Component {
         </div>
         <div className="app-view">
           <Switch>
-            <Route path="/auth" render={() => <Auth handleLogin={this.handleLogin} />} />
+            <Route path="/auth" render={(): React.ReactFragment => <Auth handleLogin={(): void => this.handleLogin()} />} />
             <Route
               path="/recipes"
-              render={(props) => {
+              render={(props): React.ReactFragment => {
                 if (!isAuthenticated) {
                   props.history.push('/auth');
                   return <Auth handleLogin={this.handleLogin} />;
@@ -54,10 +58,10 @@ class App extends React.Component {
                 return <Recipes />;
               }}
             />
-            <Route path="/shopping-list" render={() => <Shopping />} />
+            <Route path="/shopping-list" render={(): React.ReactFragment => <Shopping /> } />
             <Route
               path="/"
-              render={(props) => {
+              render={(props): React.ReactFragment => {
                 if (!isAuthenticated) {
                   props.history.push('/auth');
                   return <Auth handleLogin={this.handleLogin} />;
@@ -73,29 +77,14 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RecipeBookState): RecipeBookState => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setIsAuthenticated: (isAuthenticated) => dispatch(setAuth(isAuthenticated)),
+
+const mapDispatchToProps = (dispatch: any): any => ({
+  setIsAuthenticated: (isAuthenticated: boolean) => dispatch(setAuth(isAuthenticated)),
 });
 
-App.defaultProps = {
-  isAuthenticated: false,
-  setIsAuthenticated() {
-  },
-};
-App.propTypes = {
-  isAuthenticated: {
-    type: propTypes.bool,
-    required: true,
-  },
 
-  setIsAuthenticated: {
-    type: propTypes.func,
-    required: true,
-  },
-
-};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

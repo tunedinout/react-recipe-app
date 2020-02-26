@@ -1,21 +1,25 @@
-import React from 'react';
-import propTypes from 'prop-types';
+import * as React from 'react';
 import './auth.css';
-
-class Auth extends React.Component {
-  constructor() {
-    super();
+interface Props {
+  handleLogin: Function;
+}
+interface State {
+  loginActive: boolean;
+}
+class Auth extends React.Component <Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.state = {
       loginActive: true,
     };
   }
 
-  toggleSignup() {
+  toggleSignup(): void {
     const { loginActive } = this.state;
     this.setState({ loginActive: !loginActive });
   }
 
-  render() {
+  render(): React.ReactFragment {
     const { loginActive } = this.state;
     const { handleLogin } = this.props;
 
@@ -26,24 +30,24 @@ class Auth extends React.Component {
             <span>E-mail</span>
           </div>
           <div className="form-email-input">
-            <input style={{ height: '25px' }} size="70" type="text" />
+            <input style={{ height: '25px' }} size={70} type="text" />
           </div>
           <br />
           <div className="form-paswd-txt">
             <span>Password</span>
           </div>
           <div className="form-paswd-input">
-            <input style={{ height: '25px' }} size="70" type="password" />
+            <input style={{ height: '25px' }} size={70} type="password" />
           </div>
 
         </div>
 
         <div className="form-btn-container">
-          <button type="submit" className="form-btn-login" onClick={handleLogin}>
+          <button type="submit" className="form-btn-login" onClick={(): void => handleLogin()}>
             { loginActive ? 'Login' : 'Signup' }
           </button>
           |
-          <button type="button" className="form-btn-switch" onClick={() => this.toggleSignup()}>
+          <button type="button" className="form-btn-switch" onClick={(): void => this.toggleSignup()}>
             Switch to
             {' '}
             { !loginActive ? 'Login' : 'Signup' }
@@ -53,15 +57,6 @@ class Auth extends React.Component {
     );
   }
 }
-Auth.defaultProps = {
-  handleLogin() {
-  },
-};
-Auth.propTypes = {
-  handleLogin: {
-    type: propTypes.func,
-    required: true,
-  },
-};
+
 
 export default Auth;

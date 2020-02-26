@@ -1,9 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import './recipes.css';
 
-class Recipes extends React.Component {
-  constructor() {
-    super();
+
+interface State {
+  newClick: boolean;
+  imgURL: string;
+}
+class Recipes extends React.Component<{}, State> {
+  constructor(props: {}) {
+    super(props);
     this.state = {
       newClick: false,
       imgURL: '',
@@ -11,18 +16,18 @@ class Recipes extends React.Component {
     this.renderRecipeForm = this.renderRecipeForm.bind(this);
   }
 
-  onNewClick() {
+  onNewClick(): void {
     const { newClick } = this.state;
     this.setState({
       newClick: !newClick,
     });
   }
 
-  handleInputChange(event) {
-    this.setState({ imgURL: event.target.value });
+  handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    this.setState({ imgURL: (event.target).value });
   }
 
-  renderRecipeForm() {
+  renderRecipeForm(): React.ReactFragment {
     const { imgURL } = this.state;
     return (
       <>
@@ -42,7 +47,7 @@ class Recipes extends React.Component {
 
         <div className="input-container">
           <span>Image URL</span>
-          <input type="text" onChange={(event) => { this.handleInputChange(event); }} value={imgURL} />
+          <input type="text" onChange={(event: React.ChangeEvent<HTMLInputElement>): void => { this.handleInputChange(event); }} value={imgURL} />
         </div>
 
         {imgURL ? (
@@ -60,7 +65,7 @@ class Recipes extends React.Component {
     );
   }
 
-  render() {
+  render(): React.ReactFragment {
     const { newClick } = this.state;
     return (
       <div className="recipe-container">
@@ -68,7 +73,7 @@ class Recipes extends React.Component {
           <button
             type="button"
             className="btn-new"
-            onClick={() => { this.onNewClick(); }}
+            onClick={(): void => { this.onNewClick(); }}
           >
             New recipe
           </button>

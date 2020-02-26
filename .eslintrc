@@ -1,9 +1,17 @@
 {
-    "parser" : "babel-eslint",
-    "extends" : ["airbnb"],
+    "parser": "@typescript-eslint/parser",
+    "extends" : [
+        "./node_modules/eslint-config-airbnb-base/rules/best-practices.js",
+    "./node_modules/eslint-config-airbnb-base/rules/errors.js",
+    "./node_modules/eslint-config-airbnb-base/rules/node.js",
+    "./node_modules/eslint-config-airbnb-base/rules/style.js",
+    "./node_modules/eslint-config-airbnb-base/rules/variables.js",
+    "./node_modules/eslint-config-airbnb-base/rules/es6.js",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+    ],
     "env": {
         "browser": true,
         "node": true
     }
-    
 }

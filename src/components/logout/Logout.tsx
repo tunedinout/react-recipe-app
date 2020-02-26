@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 
-function Logout() {
+function Logout(): React.ReactFragment {
   return (
     <div>
       Logout Component

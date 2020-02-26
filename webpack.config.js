@@ -1,17 +1,21 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const ExtractWebpackTextPlugin  = require('extract-text-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
     publicPath: '/',
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
+  devtool: 'source-map',
   devServer: {
     publicPath: '/',
     contentBase: './src',
@@ -37,30 +41,12 @@ module.exports = {
         ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              [
-                '@babel/preset-env',
-                {
-                  targets: {
-                    node: '12',
-                  },
-                },
-              ],
-              '@babel/preset-react',
-            ],
-            plugins: [
-              '@babel/plugin-proposal-object-rest-spread',
-              '@babel/plugin-transform-react-jsx',
-            ],
-          },
+          loader: 'awesome-typescript-loader',
         },
       },
-
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
@@ -75,5 +61,4 @@ module.exports = {
       },
     ],
   },
-
 };

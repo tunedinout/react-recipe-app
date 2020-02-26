@@ -1,9 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import propTypes from 'prop-types';
+import * as React from 'react';
+import * as Redux from 'react-redux';
 import history from '../history';
 import './header.css';
+import { RecipeBookState } from '../types/types';
 
 const lightBtnBg = 'rgb(240, 245, 244)';
 const darkBtnBg = 'rgb(212, 217, 213)';
@@ -14,9 +13,23 @@ const defaultBgColors = {
   logoutBgColor: lightBtnBg,
   manageBgColor: lightBtnBg,
 };
-class Header extends React.Component {
-  constructor() {
-    super();
+
+interface Props {
+  isAuthenticated?: boolean;
+  logout?: Function;
+}
+
+interface State {
+  authBgColor?: string;
+  recpBgColor?: string;
+  shopBgColor?: string;
+  logoutBgColor?: string;
+  manageBgColor?: string;
+
+}
+class Header extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
     this.onAuthClick = this.onAuthClick.bind(this);
     this.onRecpClick = this.onRecpClick.bind(this);
     this.onShopClick = this.onShopClick.bind(this);
@@ -27,7 +40,7 @@ class Header extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     let currentURL = `${window.location}`;
     currentURL = currentURL.substring(currentURL.lastIndexOf('/') + 1);
     if (currentURL === 'shopping-list') this.onShopClick();
@@ -35,22 +48,8 @@ class Header extends React.Component {
     else if (currentURL === 'auth') this.onAuthClick();
   }
 
-  // componentDidUpdate() {
-  //   let currentURL = `${window.location}`;
-  //   currentURL = currentURL.substring(currentURL.lastIndexOf('/') + 1);
-  //   console.log(currentURL);
 
-  //   if (currentURL === 'shopping-list') {
-  //     this.setState({
-  //       ...defaultBgColors,
-  //       shopBgColor: darkBtnBg,
-  //     });
-  //   }
-  //   else if (currentURL === 'recipes') this.onRecpClick();
-  //   else if (currentURL === 'auth') this.onAuthClick();
-  // }
-
-  onAuthClick() {
+  onAuthClick(): void {
     history.push('/auth');
     this.setState({
       ...defaultBgColors,
@@ -58,7 +57,7 @@ class Header extends React.Component {
     });
   }
 
-  onRecpClick() {
+  onRecpClick(): void {
     history.push('/recipes');
     this.setState({
       ...defaultBgColors,
@@ -66,7 +65,7 @@ class Header extends React.Component {
     });
   }
 
-  onShopClick() {
+  onShopClick(): void {
     history.push('/shopping-list');
     this.setState({
       ...defaultBgColors,
@@ -74,14 +73,14 @@ class Header extends React.Component {
     });
   }
 
-  onLogoutClick() {
+  onLogoutClick(): void {
     this.setState({
       ...defaultBgColors,
       logoutBgColor: darkBtnBg,
     });
   }
 
-  onManageClick() {
+  onManageClick(): void {
     this.setState({
       ...defaultBgColors,
       manageBgColor: darkBtnBg,
@@ -89,7 +88,7 @@ class Header extends React.Component {
   }
 
 
-  render() {
+  render(): React.ReactFragment {
     let { authBgColor, recpBgColor, shopBgColor } = this.state;
     const { logoutBgColor, manageBgColor } = this.state;
     const { logout, isAuthenticated } = this.props;
@@ -102,7 +101,7 @@ class Header extends React.Component {
     if (currentURL === 'auth') authBgColor = darkBtnBg;
 
     return (
-
+      <>
       <div className="header-container">
 
         <div className="header-title">
@@ -122,7 +121,7 @@ class Header extends React.Component {
             >
 
               <div className="auth-txt">
-                <div className="auth-link" to="/auth"> Authentication </div>
+                <div className="auth-link"> Authentication </div>
               </div>
 
             </button>
@@ -161,12 +160,11 @@ class Header extends React.Component {
         <button
           type="button"
           className="logout-btn"
-          onClick={logout}
-          onKeyDown={logout}
+          onClick={(): void => logout()}
           style={{ backgroundColor: logoutBgColor }}
         >
           <div className="logout-txt">
-            <Link className="logout-link" to="/logout"> Logout</Link>
+            <div className="logout-link" > Logout</div>
           </div>
 
 
@@ -179,7 +177,7 @@ class Header extends React.Component {
             onKeyDown={this.onManageClick}
             style={{ backgroundColor: manageBgColor }}
           >
-            <Link href="/manage/" className="manage-link">Manage</Link>
+            <div className="manage-link">Manage</div>
           </button>
           <div className="manage-content">
             <p>Save Data</p>
@@ -187,30 +185,13 @@ class Header extends React.Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }
 
-Header.defaultProps = {
-  isAuthenticated: false,
-  logout() {
-  },
-};
-Header.propTypes = {
-  isAuthenticated: {
-    type: propTypes.bool,
-    required: true,
-  },
-
-  logout: {
-    type: propTypes.func,
-    required: true,
-  },
-
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RecipeBookState): RecipeBookState => ({
   isAuthenticated: state.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(Header);
+export default Redux.connect(mapStateToProps)(Header);
